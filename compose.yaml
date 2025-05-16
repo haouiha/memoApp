@@ -2,12 +2,15 @@ services:
     db:
         image: postgres:latest
         environment:
+            POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
             POSTGRES_DB: memo
         ports:
             - 5432:5432
         networks:
             - prisma-network
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
 
     app:
         build:
@@ -15,7 +18,7 @@ services:
         image: nextjs-memo
         environment:
             NEXT_PUBLIC_API_URL: http://localhost:3000
-            DATABASE_URL: 'postgresql://postgres:password@db:5432/memo'
+            DATABASE_URL: 'postgresql://postgres:password@memo-db-1:5432/memo'
             NEXTAUTH_SECRET: test
         ports:
             - '3000:3000'
@@ -26,3 +29,6 @@ services:
 networks:
     prisma-network:
         driver: bridge
+
+volumes:
+    postgres_data:
