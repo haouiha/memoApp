@@ -1,6 +1,8 @@
 services:
     db:
+        container_name: db
         image: postgres:latest
+        restart: always
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
@@ -12,12 +14,13 @@ services:
         networks:
             - prisma-network
     app:
+        container_name: app
         build:
             context: .
         image: nextjs-memo
         environment:
             NEXT_PUBLIC_API_URL: http://localhost:3000
-            DATABASE_URL: 'postgresql://postgres:password@memo-db-1:5432/memo?schema=public'
+            DATABASE_URL: 'postgresql://postgres:password@db:5432/memo?schema=public'
             NEXTAUTH_SECRET: test
         ports:
             - '3000:3000'
