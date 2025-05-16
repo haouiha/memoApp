@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddButton, CardBox } from './MemoCard.styled';
+import { AddButton } from './MemoCard.styled';
 
 interface MemoCardAddProps {
 	onClick: () => void;

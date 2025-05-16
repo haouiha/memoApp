@@ -11,9 +11,11 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
 	...compat.config({
-		extends: ['next/typescript'],
+		extends: ['next/typescript', 'prettier', 'next/core-web-vitals'],
 		rules: {
 			'@typescript-eslint/no-explicit-any': 'off',
+			'import/no-anonymous-default-export': 'off',
+			'@typescript-eslint/no-empty-object-type': 'off',
 		},
 	}),
 ];
