@@ -7,8 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"db:deploy": "npx prisma db push && npx prisma migrate deploy && npx prisma generate",
-		"vercel-build": "docker compose up -d"
+		"db:deploy": "npx prisma db push && npx prisma migrate deploy && npx prisma generate"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.8.2",
