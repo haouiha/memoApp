@@ -3,7 +3,6 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# COPY .npmrc .npmrc
 COPY package.json yarn.lock ./
 COPY prisma ./prisma/
 
@@ -11,7 +10,7 @@ RUN yarn install
 
 RUN npx prisma generate
 COPY . .
-# COPY /.env.example ./.env
+
 RUN yarn build
 
 # Stage 2: Production
@@ -19,7 +18,7 @@ FROM node:20-alpine AS runner
 
 WORKDIR /app
 
-# COPY .npmrc .npmrc
+
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/node_modules ./node_modules
