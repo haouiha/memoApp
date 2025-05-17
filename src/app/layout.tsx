@@ -1,7 +1,7 @@
 import { NextAuthProvider, QueryClientProvider } from '@/context';
 import StyledComponentsProvider from '@/context/StyledComponentsProvider';
 import { Metadata } from 'next';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import StyledComponentsRegistry from '@/libs/styled-components';
 
 import '@/styles/globals.css';
@@ -22,7 +22,9 @@ const RootLayout = ({ children }: RootLayoutProps) => {
 				<QueryClientProvider>
 					<NextAuthProvider>
 						<StyledComponentsRegistry>
-							<StyledComponentsProvider>{children}</StyledComponentsProvider>
+							<StyledComponentsProvider>
+								<Suspense>{children}</Suspense>
+							</StyledComponentsProvider>
 						</StyledComponentsRegistry>
 					</NextAuthProvider>
 				</QueryClientProvider>
