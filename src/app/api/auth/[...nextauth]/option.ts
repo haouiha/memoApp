@@ -5,9 +5,6 @@ export const authOptions: NextAuthOptions = {
 	session: {
 		strategy: 'jwt',
 	},
-	jwt: {
-		secret: process.env.NEXTAUTH_SECRET,
-	},
 	pages: {
 		signIn: '/auth/login',
 		error: '/auth/login',
@@ -24,7 +21,7 @@ export const authOptions: NextAuthOptions = {
 			},
 			async authorize(credentials) {
 				try {
-					const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/sign-in`, {
+					const response = await axios.post(`${process.env.NEXTAUTH_URL}/api/sign-in`, {
 						username: credentials?.username,
 						password: credentials?.password,
 					});
