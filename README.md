@@ -1,13 +1,19 @@
 # memoApp 
 
-## Nextjs + Prisma + Postgresql
+### Nextjs + Prisma + Postgresql
 
-### command to run
+## command to run
 ```
 docker compose up
 ```
-### Login with
+## Login with
 
 username: user1 or admin1 
 
-with any password
+_with any password_
+
+
+## Demo
+https://memoapp-y93x.onrender.com/
+#### note!
+- don't have remove feature 
