@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions: NextAuthOptions = {
 	session: {
@@ -11,7 +12,7 @@ export const authOptions: NextAuthOptions = {
 	},
 	secret: process.env.NEXTAUTH_SECRET,
 	providers: [
-		{
+		CredentialsProvider({
 			id: 'custom-credentials',
 			name: 'Custom Credentials',
 			type: 'credentials',
@@ -35,7 +36,7 @@ export const authOptions: NextAuthOptions = {
 					throw new Error('Unauthorized : ' + error);
 				}
 			},
-		},
+		}),
 	],
 	callbacks: {
 		jwt: async ({ token, user }) => {

@@ -4,16 +4,24 @@ import { signIn } from 'next-auth/react';
 import LoginForm, { LoginFormFields } from '../components/LoginForm';
 import styled from 'styled-components';
 import { media } from '@/styles/theme';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const LoginPage = () => {
+	const searchParams = useSearchParams();
+	const callbackUrl = searchParams.get('callbackUrl');
+	const router = useRouter();
+
 	const onSubmit = async (data: LoginFormFields) => {
 		try {
-			await signIn('custom-credentials', {
+			const result = await signIn('custom-credentials', {
 				username: data.username,
 				password: data.password,
-				redirect: true,
-				callbackUrl: '/',
+				redirect: false,
 			});
+
+			if (result?.ok) {
+				router.push(callbackUrl || '/');
+			}
 		} catch (error) {
 			console.error('login error', error);
 		}
